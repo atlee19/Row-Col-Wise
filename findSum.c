@@ -57,11 +57,11 @@ int main(int argc, char* argv[])
 
 
     gettimeofday(&tstart, NULL);
-    sum = matrixSumColWise(matrix, numRows, numCols);
+    int sum_2 = matrixSumColWise(matrix, numRows, numCols);
     gettimeofday(&tend, NULL);
 
     runtime = tend.tv_sec - tstart.tv_sec + (tend.tv_usec - tstart.tv_usec)/1.e6;
-    fprintf(stdout, "Sum found processing col-wise: %d\n", sum);
+    fprintf(stdout, "Sum found processing col-wise: %d\n", sum_2);
     fprintf(stdout, "Run time = %.8lf\n", runtime);
 
     if(flag == 'y'){
@@ -82,16 +82,13 @@ void loadMatrixFromFile(char file_name[], int matrix[MAX][MAX], int* numRowsPtr,
     } 
 
     //read in matrix size
-    fscanf(fp, "%i", numRowsPtr);
-    fscanf(fp, "%i", numColsPtr);
+    fscanf(fp, "%d %d", numRowsPtr, numColsPtr);
 
     //read in the rest of the matrix contents 
-    for(int row=0; row < *numRowsPtr; row++){
-        for(int col=0; col < *numColsPtr; col++){
+    for(int row=0; row < *numRowsPtr; row++)
+        for(int col=0; col < *numColsPtr; col++)
             fscanf(fp, "%d", &matrix[row][col]);
-        }
-    }
-   
+        
 
     fclose(fp);
   
@@ -103,8 +100,6 @@ void dumpToDisplay(int matrix[MAX][MAX], int numRows, int numCols){
 
     fprintf(stdout, "Rows = %d \n", numRows);
     fprintf(stdout, "Columns = %d \n", numCols);
-
-    // printf("%d", matrix[0][2]);
 
     for(int row=0; row < numRows; row++){
         for(int col=0; col < numCols; col++){
@@ -129,7 +124,7 @@ int matrixSumColWise(int matrix[MAX][MAX], int numRows, int numCols){
     int sum=0;
     for(int col=0; col < numCols; col++){
         for(int row=0; row < numRows; row++){
-            sum += matrix[col][row];
+            sum += matrix[row][col];
         }
     }
 
