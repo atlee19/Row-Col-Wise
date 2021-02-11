@@ -31,8 +31,8 @@ void loadMatrixFromFile(char file_name[], int matrix[1000][1000], int* numRowsPt
     fscanf(fp, "%i", numColsPtr);
 
     //read in the rest of the matrix contents 
-    for(size_t row=0; row < *numRowsPtr; row++){
-        for(size_t col=0; col < *numColsPtr; col++){
+    for(int row=0; row < *numRowsPtr; row++){
+        for(int col=0; col < *numColsPtr; col++){
             fscanf(fp, "%d", &matrix[row][col]);
         }
     }
@@ -51,9 +51,10 @@ void dumpToDisplay(int matrix[1000][1000], int numRows, int numCols){
 
     // printf("%d", matrix[0][2]);
 
-    for(size_t row=0; row < numRows; row++){
-        for(size_t col=0; col < numCols; col++){
-            fprintf (stdout, "%d", matrix[row][col]);
+    for(int row=0; row < numRows; row++){
+        for(int col=0; col < numCols; col++){
+            fprintf (stdout, "%10d", matrix[row][col]);
         }
     }
+    fprintf(stdout,"\n");
 }
