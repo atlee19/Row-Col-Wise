@@ -125,7 +125,7 @@ int matrixSumRowWise(int matrix[MAX][MAX], int numRows, int numCols){
     return sum;
 }
 
-int matrixSumColWise(int matrix[1000][1000], int numRows, int numCols){
+int matrixSumColWise(int matrix[MAX][MAX], int numRows, int numCols){
     int sum=0;
     for(int col=0; col < numCols; col++){
         for(int row=0; row < numRows; row++){
